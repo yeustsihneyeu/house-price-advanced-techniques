@@ -1,33 +1,83 @@
-# House Prices – EDA (Work in Progress)
+# House Prices (Work in Progress)
 
-## Project Goal
-The goal of this project is to predict **SalePrice** (final house sale price).  
-The evaluation metric is **RMSE**.
+## Overview
+
+This project focuses on predicting residential property prices using the **House Prices: Advanced Regression Techniques** dataset from Kaggle.
+The objective is to build a machine learning pipeline that performs data preprocessing, feature engineering, model training, and evaluation to accurately estimate house sale prices.
+
+The task is a **supervised regression problem**, where the target variable is:
+
+* **SalePrice** — the final sale price of each property.
 
 ## Dataset
-Dataset: Kaggle – House Prices: Advanced Regression Techniques  
-The dataset contains **1460 rows** and **81 features**.
 
-## Current Status
-This repository contains the **first stage of the project — Exploratory Data Analysis (EDA)**.  
-The analysis is **not finished yet**.
+Dataset: *House Prices: Advanced Regression Techniques* (Kaggle)
 
-## What is Done
-- Dataset loading and dataset overview
-- Splitting features into **numerical** and **categorical**
-- Missing value analysis
-- Identification of features with many missing values
-- Target (SalePrice) distribution analysis
-- Log-transformation check for the target
-- Numerical and categorical feature reports
-- Initial recommendations:
-  - Drop features with very high missing values
-  - Remove `Id` column
-  - Replace missing values for some features
-  - Apply log transformation for skewed features
-  - Create binary flags for some features
-- Initial feature–target interaction analysis (correlation and mutual information)
-- Feature–feature interaction analysis (correlation and VIF)
+The dataset contains **80 explanatory variables** describing different aspects of residential homes, including:
 
-## Next Steps
-Further preprocessing, feature engineering, and model training will be implemented later.
+* Property size and layout (LotArea, GrLivArea, TotalBsmtSF)
+* Construction and materials (YearBuilt, OverallQual)
+* Neighborhood information
+* Garage, basement, and exterior features
+* Sale conditions
+
+Data files:
+
+* `train.csv` – training data with target variable `SalePrice`
+* `test.csv` – test data for predictions
+* `data_description.txt` – full attribute description
+
+## Project Structure
+
+```
+house-price-advanced-techniques/
+│
+├── data/
+│   ├── train.csv
+│   ├── test.csv
+│   └── processed/
+│
+├── notebooks/
+│   ├── EDA.ipynb
+│   └── EDA.md
+│
+├── models/
+└── README.md
+```
+
+## Methodology
+
+### 1. Exploratory Data Analysis (EDA)
+
+* Dataset overview
+* Missing value analysis
+* Detection of outliers
+* Distribution analysis
+* Correlation analysis
+* Feature selections
+
+### 2. Data Preprocessing
+
+* Missing value imputation
+* Encoding categorical variables (One-Hot / Target Encoding)
+* Feature scaling (StandardScaler / RobustScaler)
+* Log transformation of skewed variables
+
+### 3. Feature Engineering
+
+* Creation of aggregated features (TotalArea, TotalBathrooms)
+* Age-related features (HouseAge, RemodelAge)
+* Interaction features between key predictors
+
+### 4. Modeling
+
+Models evaluated:
+
+* Linear Regression / Ridge / Lasso
+* Random Forest Regressor
+* Gradient Boosting (XGBoost / LightGBM)
+* Ensemble / Stacking models
+
+Evaluation metric:
+
+* **Root Mean Squared Log Error (RMSLE)**

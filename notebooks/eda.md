@@ -247,10 +247,12 @@ Supporting predictors:
 **What was done**
 
 * Calculated mutual information for categorical features.
+* Calculated ANOVA F-test
 
 **Why**
 
 * Captures non-linear relationships between categorical variables and the target.
+* Defined ANOVA F-test to evaluate between-group differences based on the ratio of between-group to within-group mean variance based on the target. 
 
 **Result**
 Strong predictors:
