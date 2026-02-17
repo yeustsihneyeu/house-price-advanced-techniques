@@ -58,16 +58,11 @@ house-price-advanced-techniques/
 
 ### 2. Data Preprocessing
 
-* Missing value imputation
-* Encoding categorical variables (One-Hot / Target Encoding)
-* Feature scaling (StandardScaler / RobustScaler)
-* Log transformation of skewed variables
+
 
 ### 3. Feature Engineering
 
-* Creation of aggregated features (TotalArea, TotalBathrooms)
-* Age-related features (HouseAge, RemodelAge)
-* Interaction features between key predictors
+
 
 ### 4. Modeling
 
@@ -76,7 +71,6 @@ Models evaluated:
 * Linear Regression / Ridge / Lasso
 * Random Forest Regressor
 * Gradient Boosting (XGBoost / LightGBM)
-* Ensemble / Stacking models
 
 Evaluation metric:
 
