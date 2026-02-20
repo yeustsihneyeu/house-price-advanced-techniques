@@ -129,7 +129,7 @@ A separate `Pipeline` is built for each feature group. This ensures reproducibil
 |---|---|---|
 | `numeric_pipeline` | `SimpleImputer(median)` → `StandardScaler` | `GarageCars`, `Fireplaces`, `HalfBath`, `BsmtFullBath`, `BsmtHalfBath`, `MoSold` |
 | `skewed_numeric_pipeline` | `SimpleImputer(median)` → `log1p` → `StandardScaler` | `LotArea`, `GrLivArea`, `TotalBsmtSF`, `MasVnrArea`, `OpenPorchSF`, `WoodDeckSF`, `EnclosedPorch`, `ScreenPorch` |
-| `ordinal_categorical_pipeline` | `SimpleImputer(most_frequent)` → `OrdinalEncoder` (manual order) | 18 ordinal features |
+| `ordinal_categorical_pipeline` | `SimpleImputer(constant, NA)` → `OrdinalEncoder` (manual order) | 18 ordinal features |
 | `nominal_categorical_pipeline` | `SimpleImputer(most_frequent)` → `OneHotEncoder(handle_unknown='ignore')` | 18 nominal features |
 | `zero_inflated_pipeline` | `SimpleImputer(median)` → `ZeroInflationTransformer` | 9 zero-inflated features |
 | `ages_pipeline` | `DiffTransformer` × 3 → `SimpleImputer(median)` → `StandardScaler` | `YrSold`, `YearBuilt`, `YearRemodAdd`, `GarageYrBlt` |
@@ -183,12 +183,12 @@ This lets the model train in log space, where relationships are more linear, and
 
 | Fold | RMSE |
 |---|---|
-| Fold 1 | 27,298.90 |
-| Fold 2 | 32,333.56 |
-| Fold 3 | 39,819.19 |
-| Fold 4 | 23,754.97 |
-| Fold 5 | 22,807.79 |
-| **Mean** | **29,202.88** |
+| Fold 1 | 27,351 |
+| Fold 2 | 32,425 |
+| Fold 3 | 40,047 |
+| Fold 4 | 24,136 |
+| Fold 5 | 23,066 |
+| **Mean** | **29,405** |
 
 The spread between folds (22k–39k) shows that model quality depends on data composition. Fold 3 is the worst, which may indicate unusual objects in that subset.
 
@@ -198,17 +198,17 @@ The spread between folds (22k–39k) shows that model quality depends on data co
 
 After cross-validation, the model is trained on the full train set and evaluated on the hold-out validation set (20%):
 
-**Validation RMSE: 26,611.98**
+**Validation RMSE: 27,028**
 
 Comparison with the naive `DummyRegressor` (strategy: `median` — always predicts the median price):
 
 | Model | RMSE | Improvement |
 |---|---|---|
 | DummyRegressor (median) | 88,667.17 | — |
-| **Linear Regression (our model)** | **26,611.98** | **−70.0%** |
+| **Linear Regression (our model)** | **27,028** | **~70.0%** |
 
 > **RMSE interpretation:**  
-> RMSE ~26,600 means the average prediction error is about $26,000. With a median house price of ~$163,000, this is roughly a **16% relative error**. For a linear model as a baseline — this is a good result.
+> RMSE ~27,000 means the average prediction error is about $27,000. With a median house price of ~$163,000, this is roughly a **16% relative error**. For a linear model as a baseline — this is a good result.
 
 ---
 
@@ -242,8 +242,8 @@ Comparison with the naive `DummyRegressor` (strategy: `median` — always predic
 - Implemented 6 different processing pipelines for different feature types
 - Written 2 custom transformers (`ZeroInflationTransformer`, `DiffTransformer`)
 - Applied log transformation to the target variable to improve training
-- Completed 5-fold cross-validation: **mean RMSE = 29,202**
-- **Validation RMSE = 26,611** — a **70% improvement** over the naive baseline (88,667)
+- Completed 5-fold cross-validation: **mean RMSE = 29,405**
+- **Validation RMSE = 27,028** — a **70% improvement** over the naive baseline (88,667)
 
 ### ❌ Limitations
 
